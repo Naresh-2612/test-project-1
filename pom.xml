@@ -35,11 +35,11 @@
 						<muleVersion>4.4.0</muleVersion>
 						<username>Naresh26121994Cert</username>
 						<password>Naresh@1994</password>
-						<applicationName>test-project-1226</applicationName>
+						<applicationName>test-project-101</applicationName>
 						<environment>Sandbox</environment>
 						<workers>1</workers>
                         <workerType>Small</workerType>
-						
+						<objectStoreV2>true</objectStoreV2>
 					</cloudHubDeployment>
 				</configuration>
 			</plugin>
