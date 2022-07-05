@@ -30,13 +30,13 @@ stage('Certificate Check') {
 			
 			//certificate found, running keytool now. Please use Jenkins credentials to set the store password 
 			def certDetails = bat(script : "keytool -list -v -keystore ${files[0].path} -storepass welcome1", returnStdout: true)
-			final String data = "${certDetails}"
+			//final String data = "${certDetails}"
 			
 			//comment the below later 
-			echo "output : $data"
+			echo "output : ${certDetails}"
 			
 			//set the fileName, appName, orgName and envName dynamically. Currently they are hardcoded.
-            def response = bat(script: "curl --location --request POST $url --header 'Content-Type:application/java' --header 'fileName:${files[0].name}' --header 'appName:test-project-101' --header 'envName:Sandbox' --header 'orgName:Mulesoft' --data-raw \'$data\'", returnStdout: true)
+            def response = bat(script: 'curl -X POST -H "Content-Type:application/java" -H "fileName:${files[0].name}" -H "appName:test-project-101" -H "envName:Sandbox" -H "orgName:Mulesoft" --data-raw \'${certDetails}\' $url', returnStdout: true)
             echo response
 			
 	
