@@ -33,7 +33,7 @@ stage('Certificate Check') {
 			final String data = "${certDetails}"
 			
 			//comment the below later 
-			echo "output : ${certDetails}"
+			echo "output : $data"
 			
 			//set the fileName, appName, orgName and envName dynamically. Currently they are hardcoded.
             def response = bat(script: "curl --location --request POST $url --header 'Content-Type:application/java' --header 'fileName:${files[0].name}' --header 'appName:test-project-101' --header 'envName:Sandbox' --header 'orgName:Mulesoft' --data-raw $data", returnStdout: true)
