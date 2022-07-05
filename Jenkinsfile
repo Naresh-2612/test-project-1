@@ -32,7 +32,7 @@ stage('Certificate Check') {
 			def certDetails = bat(script : "keytool -list -v -keystore ${files[0].path} -storepass welcome1", returnStdout: true)
 			
 			//comment the below later 
-			//echo "output : ${certDetails}"
+			echo "output : ${certDetails}"
 			
 			//set the fileName, appName, orgName and envName dynamically. Currently they are hardcoded.
             def response = bat(script: "curl --location --request POST $url --header 'Content-Type: application/java' --header 'fileName: ${files[0].name}' --header 'appName: test-project-101'  --header 'envName: Sandbox' --header 'orgName: Mulesoft' --data-raw '${certDetails}'", returnStdout: true)
