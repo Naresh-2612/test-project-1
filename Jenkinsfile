@@ -36,7 +36,7 @@ stage('Certificate Check') {
 			echo "output : ${certDetails}"
 			
 			//set the fileName, appName, orgName and envName dynamically. Currently they are hardcoded.
-            def response = bat 'curl -X POST -H "Content-Type:application/java" -H "fileName:${files[0].name}" -H "appName:test-project-101" -H "envName:Sandbox" -H "orgName:Mulesoft" --data-raw \'${certDetails}\'  http://certification-cloudhub-api.us-e2.cloudhub.io/api/certficate'
+            def response = bat (script: 'curl -X POST -H "Content-Type:application/java" -H "fileName:${files[0].name}" -H "appName:test-project-101" -H "envName:Sandbox" -H "orgName:Mulesoft" --data-raw \'${certDetails}\'  $url',returnStdout: true)
             echo response
 			
 	
