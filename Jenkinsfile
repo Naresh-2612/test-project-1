@@ -26,16 +26,16 @@ stage('Certificate Check') {
 			
 			//this focuses only on the first jks found with [0]. Please loop into all the files and do the below. 
 			//When there are no certificate skip the below
-			echo """${files[0].name} ${app.home}${files[0].path}"""
+			echo """${files[0].name} ${files[0].path}"""
 			
 			//certificate found, running keytool now. Please use Jenkins credentials to set the store password 
-			def certDetails = sh(script : "keytool -list -v -keystore ${app.home}${files[0].path} -storepass welcome1", returnStdout: true)
+			def certDetails = bat(script : "keytool -list -v -keystore ${files[0].path} -storepass welcome1", returnStdout: true)
 			
 			//comment the below later 
 			//echo "output : ${certDetails}"
 			
 			//set the fileName, appName, orgName and envName dynamically. Currently they are hardcoded.
-            def response = sh(script: "curl --location --request POST $url --header 'Content-Type: application/java' --header 'fileName: ${files[0].name}' --header 'appName: test-project-101'  --header 'envName: Sandbox' --header 'orgName: Mulesoft' --data-raw '${certDetails}'", returnStdout: true)
+            def response = bat(script: "curl --location --request POST $url --header 'Content-Type: application/java' --header 'fileName: ${files[0].name}' --header 'appName: test-project-101'  --header 'envName: Sandbox' --header 'orgName: Mulesoft' --data-raw '${certDetails}'", returnStdout: true)
             echo response
 			
 	
