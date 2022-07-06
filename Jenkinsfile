@@ -12,17 +12,6 @@ echo 'Application in Testing Phase…'
 bat 'mvn test'
 }
 }
-
-stage('Deploy CloudHub') {
-environment {
-ANYPOINT_CREDENTIALS = credentials('anypoint.credentials')
-}
-steps {
-echo 'Deploying mule project due to the latest code commit…'
-echo 'Deploying to the configured environment….'
- bat 'mvn package deploy -DmuleDeploy -Dusername=${ANYPOINT_CREDENTIALS_USR} -Dpassword=${ANYPOINT_CREDENTIALS_PSW}'
-}
-}
 // add this stage to your pipeline which uses simple groovy that can be improved according to the details required.
 stage('Certificate Check') {
     steps {
@@ -52,6 +41,17 @@ stage('Certificate Check') {
 	}
 
 }
+stage('Deploy CloudHub') {
+environment {
+ANYPOINT_CREDENTIALS = credentials('anypoint.credentials')
+}
+steps {
+echo 'Deploying mule project due to the latest code commit…'
+echo 'Deploying to the configured environment….'
+ bat 'mvn package deploy -DmuleDeploy -Dusername=${ANYPOINT_CREDENTIALS_USR} -Dpassword=${ANYPOINT_CREDENTIALS_PSW}'
+}
+}
+
 
 }
 }
